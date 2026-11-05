@@ -1,6 +1,6 @@
-# TC Level Editor MCP 1.1.0
+# TC Level Editor MCP 1.2.0
 
-Windows 关卡编辑器，附可供 agent 调用的 MCP stdio 服务。解压完整压缩包即可使用，不需要 Python 或编辑器源码。原版编译检查需要用户自行提供游戏安装目录；包内不含 compile.dll。
+Windows 关卡编辑器，附可供 agent 调用的 MCP stdio 服务。解压完整压缩包即可使用，不需要 Python 或编辑器源码。内置 97 个原版关卡，创建和编辑工程无需安装原版游戏。原版编译检查需要用户自行提供游戏安装目录；包内不含 compile.dll。
 
 ## 连接正在使用的编辑器
 
@@ -39,6 +39,7 @@ Windows 关卡编辑器，附可供 agent 调用的 MCP stdio 服务。解压完
 
 | 工具 | 用途 |
 | --- | --- |
+| project.create | 从内置原版关卡创建工程，无需游戏目录；可选 source 用于导入其他 campaign |
 | project.open | 打开已存在的工程 |
 | level.list / level.read | 查询关卡、配置与端口 |
 | level.create / level.copy | 创建、复制关卡；这两项立即写入新文件 |
@@ -95,6 +96,16 @@ speaker 可选值由 capabilities 返回。批量对话操作失败不会留下�
 
 采用 MCP stdio 的逐行 UTF-8 JSON-RPC，支持 initialize、ping、tools/list 和 tools/call。
 协议参考：[MCP stdio](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports)、[MCP tools](https://modelcontextprotocol.io/specification/2025-06-18/server/tools)。
+
+## 从内置原版关卡创建
+
+不带参数启动 TCLevelAgent.exe，先调用 capabilities 取得 revision，再调用：
+
+```json
+{"name":"project.create","arguments":{"destination":"<新工程目录>","expected_revision":"<刚取得的 revision>"}}
+```
+
+无需提供 source，无需安装或查找原版游戏。目标目录必须不存在。创建后可直接调用 level.list、level.read、dialogue.read 和 script.read。编辑器的新建工程窗口也提供“从内置原版关卡创建”。编译检查仍需另行配置原版编译器；创建和编辑工程不需要编译器。
 
 
 ## 下载与参考

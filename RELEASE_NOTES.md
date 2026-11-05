@@ -1,3 +1,13 @@
+# v1.2.0 — 内置原版关卡与工程创建接口
+
+- 内置 Turing Complete 2.1.334 的 97 个原版关卡及附属资源。创建和编辑工程无需安装或查找原版游戏。
+- 编辑器新增“从内置原版关卡创建”，保留空白工程和外部 campaign 导入。
+- MCP 新增 project.create：指定新的 destination 和 expected_revision 即可创建内置原版工程；可选 source 用于导入其他 campaign。
+- 内置模板创建的工程不记录游戏安装路径，也不预设编译器目录。
+- 更新接入文档和原版关卡数据版权说明。
+
+编译检查仍需用户提供原版编译器；包内不含 compile.dll。编译检查不等于游戏内运行验收。完整解压 ZIP 后运行 TCLevelEditor.exe，或按 README 配置 TCLevelAgent.exe。
+
 # v1.1.0 — 首个 MCP 版本
 
 提供 Windows x64 打包程序与用户文档，无需安装 Python。
